@@ -1,1 +1,27 @@
+ip address/ print
+megmutatja az ip címet, hálózatot, interfacet
+
+/interface bridge port add bridge=iskola interface=ether3         (3-s van a végén)
+/interface bridge port add bridge=iskola interface=ether2         (2-s van a végén)
+betettük a bridge interfacebe az ether1-t és az ether2-t
+
+/ip pool add name=kacsadhcp ranges=192.168.63.10-192.168.34.254
+
+/ip dhcp-server add name=realdhcp interface=iskola address-pool=kacsadhcp
+
+/ip dhcp-server network add address=192.168.63.0/24 dns-server=8.8.8.8 gateway=192.168.63.1 netmask=24
+
+/ip dhcp-client add interface=ether1
+
+ip dns print      (per jel nélnuk is elfogadja)
+
+user print
+
+/user add name=kristof group=full password=12345
+
+
+
+ip firewall nat add chain=src src-address=192.168.63.0/24 action=masquerade
+
+ip service set api disabled=yes
 
